@@ -7,7 +7,7 @@ class HomeRoute extends StatefulWidget {
 
 class _HomeRouteState extends State<HomeRoute> {
   static const loadingTag = "##loading##"; //表尾标记
-  var _items = <Repo>[Repo()..name = loadingTag];
+  final _items = <Repo>[Repo()..name = loadingTag];
   bool hasMore = true; //是否还有数据
   int page = 1; //当前请求的是第几页
 
@@ -47,7 +47,7 @@ class _HomeRouteState extends State<HomeRoute> {
               return Container(
                 padding: const EdgeInsets.all(16.0),
                 alignment: Alignment.center,
-                child: SizedBox(
+                child: const SizedBox(
                   width: 24.0,
                   height: 24.0,
                   child: CircularProgressIndicator(strokeWidth: 2.0),
@@ -58,7 +58,7 @@ class _HomeRouteState extends State<HomeRoute> {
               return Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.all(16.0),
-                child: Text(
+                child: const Text(
                   "没有更多了",
                   style: TextStyle(color: Colors.grey),
                 ),
@@ -82,7 +82,7 @@ class _HomeRouteState extends State<HomeRoute> {
       },
     );
     //如果返回的数据小于指定的条数，则表示没有更多数据，反之则否
-    hasMore = data.length > 0 && data.length % 20 == 0;
+    hasMore = data.isNotEmpty && data.length % 20 == 0;
     //把请求到的新数据添加到items中
     setState(() {
       _items.insertAll(_items.length - 1, data);
